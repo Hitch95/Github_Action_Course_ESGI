@@ -19,32 +19,39 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
+      - name: Install pnpm
+        id: install-pnpm
+        uses: pnpm/action-setup@v4
         with:
           node-version: '22.9.0'
           cache: npm
 
+      - name: Install Node.js
+        id: install-node
+        uses: action/setup-node@v4
+        with:
+          node-version: '22.9.0'
+          cache: pnpm
+
       - name: Install Dependencies
         id: install-dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Check Format
         id: check-format
-        run: npm run format:check
+        run: pnpm run format:check
 
       - name: Lint
         id: lint
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Test
         id: test
-        run: npm run test
+        run: pnpm run test
 
       - name: Build
         id: build
-        run: npm run build
+        run: pnpm run build
 
   test-action:
     name: Github Action Test
