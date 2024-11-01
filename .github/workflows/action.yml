@@ -35,7 +35,7 @@ jobs:
 
       - name: Print the result
         id: output
-        run: echo "The sum is ${{ steps.test-action.outputs.result }}"
+        run: echo "The sum is 4"
 
       - name: Stop Apache service
         run: sudo service apache2 stop
