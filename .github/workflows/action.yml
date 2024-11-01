@@ -19,17 +19,21 @@ jobs:
         node-version: [22.9.0]
     steps:
       - uses: actions/checkout@v4
+      
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
+      
       - name: Check if pnpm is installed
         run: pnpm -v
+      
       - name: Use Node.js 22.9.0
         uses: actions/setup-node@v4
         with:
           node-version: '22.9.0'
           cache: 'pnpm'
+      
       - name: Install dependencies
         run: pnpm install
 
@@ -37,13 +41,6 @@ jobs:
         id: test-action
         uses: ./
     
-      - name: Print the result
-        run: echo "The sum is ${{ steps.test-action.outputs.result }}"
-
-      - name: Print the result
-        id: output
-        run: echo "The sum is 4"
-
       - name: Stop Apache service
         run: sudo service apache2 stop
 
@@ -60,7 +57,6 @@ jobs:
       - name: Test Caddy server
         run: |
           sleep 5  
-          # Wait for a few seconds to ensure the server starts up
           curl --fail http://127.0.0.1/ || exit 1
 
       - name: Stop and remove Docker container
