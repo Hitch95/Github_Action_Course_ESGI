@@ -1,10 +1,10 @@
 # Caddyfile
 localhost {
-    root * /srv
-    file_server
-    log {
-        output stdout
-        format json
-    }
-    tls internal  # Use internal TLS for local development
+	root * /srv
+	file_server
+	log {
+		output stdout
+		format json
+	}
+	tls internal # Use internal TLS for local development
 }
