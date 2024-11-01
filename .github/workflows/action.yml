@@ -33,6 +33,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Test index.ts file
+        id: test-action
+        uses: ./
+        with:
+          number1: 2
+          number2: 2
+      
+      - name: Print the result
+        run: echo "The sum is ${{ steps.test-action.outputs.result }}"
+
       - name: Print the result
         id: output
         run: echo "The sum is 4"
@@ -58,7 +68,3 @@ jobs:
 
       - name: Stop and remove Docker container
         run: docker stop caddy-server && docker rm caddy-server
-
-      - name: Test index.ts file
-        id: test-action
-        uses: ./
