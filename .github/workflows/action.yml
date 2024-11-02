@@ -40,7 +40,7 @@ jobs:
       - name: Test index.ts file
         id: test-action
         uses: ./
-    
+        
       - name: Stop Apache service
         run: sudo service apache2 stop
 
@@ -50,14 +50,14 @@ jobs:
       - name: Build Docker image
         run: docker build -t my-caddy-server .
 
-      - name: Run Docker container
+      - name: Run Docker container in foreground
         run: |
-          docker run -d --name caddy-server -p 80:80 -p 443:443 my-caddy-server
+          docker run --rm --name caddy-server -p 80:80 -p 443:443 my-caddy-server
 
       - name: Test Caddy server
         run: |
-          sleep 5  
+          sleep 10
           curl --fail http://127.0.0.1/ || exit 1
 
-      - name: Stop and remove Docker container
-        run: docker stop caddy-server && docker rm caddy-server
+      - name: View Caddy server logs
+        run: docker logs caddy-server
