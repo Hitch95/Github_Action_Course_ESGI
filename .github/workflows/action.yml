@@ -38,8 +38,7 @@ jobs:
         run: pnpm install
 
       - name: Test index.ts file
-        id: test-action
-        uses: ./
+        run: pnpm install
         
       - name: Stop Apache service
         run: sudo service apache2 stop
